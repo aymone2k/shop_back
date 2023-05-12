@@ -12,7 +12,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class Admin {
-	private Integer id;
+	private int id;
 	private String name;
 	private String password;
 	private int version;
@@ -20,7 +20,7 @@ public class Admin {
 	public Admin() {
 		
 	}
-	public Admin(Integer id, String name, String password) {
+	public Admin(int id, String name, String password) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
@@ -31,13 +31,13 @@ public class Admin {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	/**

@@ -12,11 +12,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Product")
 public class Product {
-	private Integer id_product;
+	private int id_product;
 	private String libelle;
 	private String description;
-	private int prix;
-
+	private double prix;
 	private Category category;
 	private Promotion promotion;
 	private String image;
@@ -31,13 +30,13 @@ public class Product {
 	 * @param libelle
 	 * @param description
 	 * @param prix
-	 * @param prix_promotion
+	 * @param promotion
 	 * @param category
 	
 	 * @param image
 	 * 
 	 */
-	public Product(Integer id_product, String libelle, String description, int prix, int prix_promotion, Category category,
+	public Product(int id_product, String libelle, String description, double prix, Category category,
 			Promotion promotion, String image) {
 		this.id_product = id_product;
 		this.libelle = libelle;
@@ -54,13 +53,13 @@ public class Product {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getId_product() {
+	public int getId_product() {
 		return id_product;
 	}
 	/**
 	 * @param id_product the id_product to set
 	 */
-	public void setId_product(Integer id_product) {
+	public void setId_product(int id_product) {
 		this.id_product = id_product;
 	}
 	/**
@@ -90,14 +89,14 @@ public class Product {
 	/**
 	 * @return le prix de base du produit
 	 */
-	public int getPrix() {
+	public double getPrix() {
 		return prix;
 	}
 	/**
-	 * @param prix the prix to set
+	 * @param d the prix to set
 	 */
-	public void setPrix(int prix) {
-		this.prix = prix;
+	public void setPrix(double d) {
+		this.prix = d;
 	}
 	
 	/**

@@ -61,7 +61,7 @@ public class ProductController {
 	 * @see org.springframework.data.repository.ListCrudRepository#findAll()
 	 */
 	@CrossOrigin
-	@GetMapping("/all")
+	@GetMapping("/")
 	public List<Product> findAll() {
 		return productRepo.findAll();
 	}
@@ -78,8 +78,6 @@ public class ProductController {
 	}
 
 	
-	// reste update et delete
-	// je pense qu'en passant par product on peut modififer propo et category
 	
 	
 	/**
@@ -111,6 +109,7 @@ public class ProductController {
 	 * @return supression de product suivant son ID
 	 * @see org.springframework.data.repository.CrudRepository#findById(java.lang.Object)
 	 */
+	@CrossOrigin
 	@DeleteMapping("/{id}")
 	public Map<String, Boolean> deleteproduct(@PathVariable(value = "id") Integer productId)
 			throws ResourceNotFoundException {
@@ -124,5 +123,69 @@ public class ProductController {
 	}
 	
 	
+	/**
+	 * @param id
+	 * @return affiche le product par prix croissant
+	 * @see org.springframework.data.repository.CrudRepository#findById(java.lang.Object)
+	 */
+	@CrossOrigin
+	@GetMapping("/prixasc")
+	public List<Product> prixasc(){
+		return productRepo.findAllByOrderPrixAsc();
+	}	
 	
+	/**
+	 * @param id
+	 * @return affiche le product par prix décroissant
+	 * @see org.springframework.data.repository.CrudRepository#findById(java.lang.Object)
+	 */
+	@CrossOrigin
+	@GetMapping("/prixdesc")
+	public List<Product> prixdesc(){
+		return productRepo.findAllByOrderPrixDesc();
+	}
+	
+	/**
+	 * @param id
+	 * @return affiche le product suivant un mot recherché
+	 * @see org.springframework.data.repository.CrudRepository#findById(java.lang.Object)
+	 */
+	@CrossOrigin
+	@GetMapping("/findbydesc/{str}")
+	public List<Product> desc(@PathVariable String str){
+		return productRepo.findByDescriptionContainingOrLibelleContaining(str, str);
+	}
+	
+	/**
+	 * @param id
+	 * @return affiche le product suivant un prix compris entre 2 fourchettes
+	 * @see org.springframework.data.repository.CrudRepository#findById(java.lang.Object)
+	 */
+	@CrossOrigin
+	@GetMapping("/findbyprix/{min}/{max}")
+	public List<Product> prix(@PathVariable int min, @PathVariable int max){
+		return productRepo.findByPrixBetween(min, max);
+	}
+	
+	/**
+	 * @param id
+	 * @return affiche tous les products par ordre croissant
+	 * @see org.springframework.data.repository.CrudRepository#findById(java.lang.Object)
+	 */
+	@CrossOrigin
+	@GetMapping("/findallasc/{min}/{max}")
+	public List<Product> m1(){
+		return productRepo.findAllByOrderByLibelleAsc();
+	}
+	
+	/**
+	 * @param id
+	 * @return affiche tous les products par ordre décroissant
+	 * @see org.springframework.data.repository.CrudRepository#findById(java.lang.Object)
+	 */
+	@CrossOrigin
+	@GetMapping("/findalldesc/{min}/{max}")
+	public List<Product> m2(){
+		return productRepo.findAllByOrderByLibelleDesc();
+	}
 }

@@ -14,5 +14,7 @@ import com.mercadona.api.model.Promotion;
  */
 @Repository
 public interface PromotionRepository extends JpaRepository<Promotion, Integer> {
+	
+	
 
 }

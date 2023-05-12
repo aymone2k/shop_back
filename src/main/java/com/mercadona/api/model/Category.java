@@ -16,7 +16,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="category")
 public class Category {
-	private long id_category;
+	private int id_category;
 	private String libelle;
 	private Collection<Product> products;
 	private int version;
@@ -30,7 +30,7 @@ public class Category {
 	 * @param libelle
 	 * @param products
 	 */
-	public Category(long id_category, String libelle, Collection<Product> products) {
+	public Category(int id_category, String libelle, Collection<Product> products) {
 		this.id_category = id_category;
 		this.libelle = libelle;
 		this.products = products;
@@ -41,14 +41,14 @@ public class Category {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long getId_category() {
+	public int getId_category() {
 		return id_category;
 	}
 	
 	/**
 	 * @param id_product the id_category to set
 	 */
-	public void setId_category(long id_category) {
+	public void setId_category(int id_category) {
 		this.id_category = id_category;
 	}
 	/**

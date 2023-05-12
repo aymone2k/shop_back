@@ -17,7 +17,16 @@ import com.mercadona.api.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
-	//List<Product> findByCategoryProducts();
-	//findByLastname(String lastname);
-//voir si je peux retourner les 
+	/**
+	 * @ return les produits composés de mots identiques aux mot passé en paramettre, qu'ils soient dans la drescription, le libellé 
+	 */
+	public List<Product> findByDescriptionContainingOrLibelleContaining(String chaine, String str);
+	public List<Product> findByPrixBetween(double min, double max);
+	public List<Product> findAllByOrderPrixAsc();
+	public List<Product> findAllByOrderPrixDesc();
+	public List<Product> findByPrixLessThan(double valeur);
+	public List<Product> findAllByOrderByLibelleAsc();
+	public List<Product> findAllByOrderByLibelleDesc();
+	
+
 }
