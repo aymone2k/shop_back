@@ -14,15 +14,17 @@ import jakarta.persistence.*;
 public class Admin {
 	private int id;
 	private String name;
+	private String email ;
 	private String password;
 	private int version;
 	
 	public Admin() {
 		
 	}
-	public Admin(int id, String name, String password) {
+	public Admin(int id, String name, String email, String password) {
 		this.id = id;
 		this.name = name;
+		this.email = email;
 		this.password = password;
 	}
 	/**
@@ -67,6 +69,20 @@ public class Admin {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	/**
 	 * @return the version

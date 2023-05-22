@@ -20,13 +20,15 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	/**
 	 * @ return les produits composés de mots identiques aux mot passé en paramettre, qu'ils soient dans la drescription, le libellé 
 	 */
-	public List<Product> findByDescriptionContainingOrLibelleContaining(String chaine, String str);
+	public List<Product> findByDescriptionContainingOrLibelleContainingIgnoreCase(String chaine, String str);
 	public List<Product> findByPrixBetween(double min, double max);
-	public List<Product> findAllByOrderPrixAsc();
-	public List<Product> findAllByOrderPrixDesc();
+	public List<Product> findAllByOrderByPrixAsc();
+	public List<Product> findAllByOrderByPrixDesc();
 	public List<Product> findByPrixLessThan(double valeur);
 	public List<Product> findAllByOrderByLibelleAsc();
 	public List<Product> findAllByOrderByLibelleDesc();
+	
+	public byte[] findByImage(String img);
 	
 
 }

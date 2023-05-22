@@ -1,9 +1,21 @@
+package com.mercadona.api.model;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
 /**
  * 
  */
-package com.mercadona.api.model;
 
-import jakarta.persistence.*;
 
 /**
  * @author 2kalm
@@ -12,13 +24,17 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Product")
 public class Product {
-	private int id_product;
+	private int id;
 	private String libelle;
 	private String description;
 	private double prix;
-	private Category category;
+	private int categorieId;
+	
 	private Promotion promotion;
-	private String image;
+	@Lob
+	@Column(columnDefinition = "bytea")
+    private byte[] image;
+	
 	private int version;
 	/**
 	 * 
@@ -26,7 +42,7 @@ public class Product {
 	public Product() {
 	}
 	/**
-	 * @param id_product
+	 * @param id
 	 * @param libelle
 	 * @param description
 	 * @param prix
@@ -36,14 +52,14 @@ public class Product {
 	 * @param image
 	 * 
 	 */
-	public Product(int id_product, String libelle, String description, double prix, Category category,
-			Promotion promotion, String image) {
-		this.id_product = id_product;
+	public Product(int id, String libelle, String description, double prix, int categorieId,
+			Promotion promotion, byte[] image) {
+		this.id = id;
 		this.libelle = libelle;
 		this.description = description;
 		this.prix = prix;
 	
-		this.category = category;
+		this.categorieId = categorieId;
 		this.promotion = promotion;
 		this.image = image;
 		
@@ -53,14 +69,14 @@ public class Product {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getId_product() {
-		return id_product;
+	public int getId() {
+		return id;
 	}
 	/**
 	 * @param id_product the id_product to set
 	 */
-	public void setId_product(int id_product) {
-		this.id_product = id_product;
+	public void setId(int id) {
+		this.id = id;
 	}
 	/**
 	 * @return the libelle
@@ -100,24 +116,23 @@ public class Product {
 	}
 	
 	/**
-	 * @return l' ID_category
+	 * @return the categorieId
+	 * @return en créant un produit , on ne cré pas de nouvelle catégorie
 	 * @return il peut avoir 1 à plusieurs produits pour 1 category = liaison ManyToOne, mais un seul produit par category 
 	 */
-	@ManyToOne(
-			
-			cascade = CascadeType.ALL
-	
-			)
-	@JoinColumn(name="CATEGORY_ID")
-	public Category getCategory() {
-		return category;
+	public int getCategorieId() {
+		return categorieId;
 	}
 	/**
-	 * @param category the category to set
+	 * @param categorieId2 the categorieId to set
 	 */
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategorieId(int categorieId) {
+		this.categorieId = categorieId;
 	}
+	
+	
+	
+	
 	/**
 	 * @return l' ID_promotion
 	 * @return il ne peut avoir qu'1 produit par promotion = liaison OneToOne 
@@ -129,6 +144,7 @@ public class Product {
 	public Promotion getPromotion() {
 		return promotion;
 	}
+	
 	/**
 	 * @param promotion the promotion to set
 	 */
@@ -137,15 +153,15 @@ public class Product {
 	}
 	/**
 	 * @return the image
-	 * @return est stocké en base de donnée l'url de l'image
+	 * @return 
 	 */
-	public String getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 	/**
 	 * @param image the image to set
 	 */
-	public void setImage(String image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 	/**
@@ -161,6 +177,7 @@ public class Product {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+
 	
 	
 }

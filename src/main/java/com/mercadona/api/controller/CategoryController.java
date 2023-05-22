@@ -25,6 +25,7 @@ import com.mercadona.api.repository.CategoryRepository;
  * on ne peut pas modifier ou supprimer une catégorie
  */
 @RestController
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/category")
 public class CategoryController {
 	
@@ -37,14 +38,13 @@ public class CategoryController {
 	 * @return création d'un produit
 	 * @see org.springframework.data.repository.CrudRepository#save(java.lang.Object)
 	 */
-	@CrossOrigin
 	@PostMapping("/")
 	public ResponseEntity<Object> create(@RequestBody Category category) {
-		if(!this.categoryRepo.existsById(category.getId_category())) {
+		if(!this.categoryRepo.existsById(category.getId())) {
 			this.categoryRepo.save(category);
-			return new ResponseEntity<Object>(null, HttpStatus.CREATED);
+			return new ResponseEntity<Object>(category, HttpStatus.CREATED);
 		}else {
-			return new ResponseEntity<Object>(null, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Object>(category, HttpStatus.BAD_REQUEST);
 		}
 		
 	}
@@ -55,7 +55,6 @@ public class CategoryController {
 	 * @return la liste des categorys
 	 * @see org.springframework.data.repository.ListCrudRepository#findAll()
 	 */
-	@CrossOrigin
 	@GetMapping("/")
 	public List<Category> findAll() {
 		return categoryRepo.findAll();
@@ -66,7 +65,6 @@ public class CategoryController {
 	 * @return l'category suivant son ID
 	 * @see org.springframework.data.repository.CrudRepository#findById(java.lang.Object)
 	 */
-	@CrossOrigin
 	@GetMapping("/{id}")
 	public Category findById(@PathVariable Integer id) {
 		return categoryRepo.findById(id).get();
@@ -77,7 +75,6 @@ public class CategoryController {
 	 * @return l'category suivant son nom
 	 * @see org.springframework.data.repository.CrudRepository#findById(java.lang.Object)
 	 */
-	@CrossOrigin
 	@GetMapping("/{str}")
 	public List<Category> findByCategory(@PathVariable String str) {
 		return categoryRepo.findByLibelle(str);

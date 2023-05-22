@@ -16,9 +16,9 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="category")
 public class Category {
-	private int id_category;
+	private int id;
 	private String libelle;
-	private Collection<Product> products;
+
 	private int version;
 	/**
 	 * 
@@ -26,30 +26,30 @@ public class Category {
 	public Category() {
 	}
 	/**
-	 * @param id_category
+	 * @param id
 	 * @param libelle
 	 * @param products
 	 */
-	public Category(int id_category, String libelle, Collection<Product> products) {
-		this.id_category = id_category;
+	public Category(int id, String libelle) {
+		this.id = id;
 		this.libelle = libelle;
-		this.products = products;
+		
 	}
 
 	/**
-	 * @return the id_category
+	 * @return the id
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getId_category() {
-		return id_category;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int getId() {
+		return id;
 	}
 	
 	/**
-	 * @param id_product the id_category to set
+	 * @param id_product the id to set
 	 */
-	public void setId_category(int id_category) {
-		this.id_category = id_category;
+	public void setId(int id) {
+		this.id = id;
 	}
 	/**
 	 * @return the libelle
@@ -64,22 +64,7 @@ public class Category {
 		this.libelle = libelle;
 	}
 	
-	/**
-	 * @return the products
-	 * @return une category est composée d'1 à plusieurs produits, mais un seul produit par category
-	 */
-	@OneToMany
-	@JsonIgnore
-	public Collection<Product> getProducts() {
-		return products;
-	}
 	
-	/**
-	 * @param products the products to set
-	 */
-	public void setProducts(Collection<Product> products) {
-		this.products = products;
-	}
 	/**
 	 * @return the version
 	 */
@@ -96,7 +81,7 @@ public class Category {
 	
 	@Override
 	public String toString() {
-		return "Category [id_category=" + id_category + ", libelle=" + libelle + ", products=" + products + ", version="
+		return "Category [id=" + id + ", libelle=" + libelle +  ", version="
 				+ version + "]";
 	}
 }

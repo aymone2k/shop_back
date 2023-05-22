@@ -15,4 +15,5 @@ import com.mercadona.api.model.Admin;
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
+	public Admin findByEmailAndPassword(String email, String pass); 
 }

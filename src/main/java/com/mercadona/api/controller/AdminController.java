@@ -25,7 +25,7 @@ import com.mercadona.api.repository.AdminRepository;
  * @author 2kalm
  * @return creer, read un admin
  */
-
+@CrossOrigin(origins ="http://localhost:4200")
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
@@ -39,14 +39,13 @@ public class AdminController {
 	 * @return création d'un admin
 	 * @see org.springframework.data.repository.CrudRepository#save(java.lang.Object)
 	 */
-	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<Object> create(@RequestBody Admin admin) {
 		if(!this.adminRepo.existsById(admin.getId())) {
 			this.adminRepo.save(admin);
-			return new ResponseEntity<Object>(null, HttpStatus.CREATED);
+			return new ResponseEntity<Object>(admin, HttpStatus.CREATED);
 		}else {
-			return new ResponseEntity<Object>(null, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Object>(admin, HttpStatus.BAD_REQUEST);
 		}
 		
 	}
@@ -55,7 +54,6 @@ public class AdminController {
 	 * @return la liste des admin
 	 * @see org.springframework.data.repository.ListCrudRepository#findAll()
 	 */
-	@CrossOrigin
 	@GetMapping("/all")
 	public List<Admin> findAll() {
 		return adminRepo.findAll();
@@ -66,12 +64,15 @@ public class AdminController {
 	 * @return l'admin suivant son ID
 	 * @see org.springframework.data.repository.CrudRepository#findById(java.lang.Object)
 	 */
-	@CrossOrigin
 	@GetMapping("/{id}")
 	public Admin findById(@PathVariable Integer id) {
 		return adminRepo.findById(id).get();
 	}
 
+	@GetMapping("/{mail}/{pass}")
+	public Admin findAdmin(@PathVariable String mail,@PathVariable String pass) {
+		return adminRepo.findByEmailAndPassword(mail, pass);
+	}
 		
 	
 
